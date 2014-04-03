@@ -3,6 +3,11 @@
     "esnext": true
   },
   "dependencies": {
-    "express": "^3.5.1"
+    "express": "^3.5.1",
+    "start-stop-daemon": "^0.1.0"
+  },
+  "scripts": {
+    "start": "node --harmony ./server.js start",
+    "stop": "node --harmony ./server.js stop "
   }
 }

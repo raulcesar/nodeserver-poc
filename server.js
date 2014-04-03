@@ -1,12 +1,15 @@
 const
     express = require('express'),
-    app = express();
+    app = express(),
+    startStopDaemon = require('start-stop-daemon');
     
 app.use(express.logger('dev'));
 app.get('/api/:name', function(req, res) {
     res.json(200, {"hello": req.params.name});
 });
 
-app.listen(3000, function() {
+startStopDaemon(function() {
+    app.listen(3000, function() {
         console.log('ready captain');
     });
+});
