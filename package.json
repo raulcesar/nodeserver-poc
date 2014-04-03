@@ -4,6 +4,7 @@
   },
   "dependencies": {
     "express": "^3.5.1",
+    "ldapjs": "^0.7.0",
     "start-stop-daemon": "^0.1.0"
   },
   "scripts": {
