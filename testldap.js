@@ -26,9 +26,9 @@ var opts = {
     arq = process.argv[3];
 
 
-var vezesmax = process.argv[4] || 2;
-var arquivoUnico = process.argv[5] || false;
-var iniciovezes = process.argv[6] || 1;
+var vezesmax = parseInt(process.argv[4]) || 2;
+var arquivoUnico = Boolean(process.argv[5] || false);
+var iniciovezes = parseInt(process.argv[6]) || 1;
 var searchescomplete = 0;
 var criaArquivo = function (vez) {
 client.bind('P_6486@redecamara.camara.gov.br', senha, function (err) {
@@ -76,17 +76,20 @@ client.bind('P_6486@redecamara.camara.gov.br', senha, function (err) {
             }
         });    
     };
-
-
     
     opts.filter = filterStrPrefix + '(cn=p_' + vez + '*))';
     console.log(opts.filter);
-    var arquivo = arq + '_' + vez + '.csv';
+    var arquivosufixo = '.csv';
+    if (!arquivoUnico) {
+        arquivosufixo = '_' + vez + '.csv';
+    }
+
+    var arquivo = arq + arquivosufixo; 
 
     client.search('DC=redecamara, DC=camara, DC=gov, DC=br', opts, callbacksearch); 
 });
 };
-vezesmax += (iniciovezes - 1);
+vezesmax += iniciovezes - 1;
 for (var i = iniciovezes ; i <= vezesmax ; i++) {
     console.log('i: ' + i);
     criaArquivo(i);
